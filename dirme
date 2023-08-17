@@ -1,0 +1,39 @@
+#!/bin/bash
+
+echo
+echo "+-----------------------+"
+echo "|        DirMe           |"
+echo "|   The lazy way to      |"
+echo "|       navigate         |"
+echo "+-----------------------+"
+echo
+
+# Define the directories and their descriptions
+declare -A directories=(
+    [1]="/:Root Directory"
+    [2]="/insert_directory_here:directory_description"
+)
+
+# Display menu
+echo -e "\e[1mDirectories List\e[0m"
+for key in "${!directories[@]}"; do
+    IFS=':' read -ra dir_info <<< "${directories[$key]}"
+    echo "[$key] ${dir_info[1]}"
+done
+
+# Input Select
+echo
+read -p $'\e[1;34mSelect the directory you want to navigate to:\e[0m ' selection
+
+# Check if selection is valid
+if [[ ${directories[$selection]} ]]; then
+    IFS=':' read -ra dir_info <<< "${directories[$selection]}"
+    dir_path="${dir_info[0]}"
+    dir_desc="${dir_info[1]}"
+    echo "Navigating to '$dir_desc' directory..."
+    cd "$dir_path"; 
+    $SHELL
+else
+    echo "Invalid selection."
+    exit 1
+fi
