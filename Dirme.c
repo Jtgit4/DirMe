@@ -5,6 +5,7 @@ int main(){
 
     int selection;
 
+    do {
     printf("\n\033[1mDIRME - The Lazy way to change directories\033[0m\n");
     printf("\n\033[1m[1]\033[0m - HTB Machines\n");
     printf("\033[1m[2]\033[0m - Offsec Machines\n");
@@ -12,7 +13,7 @@ int main(){
     printf("\033[1m[4]\033[0m - Linux Tools\n");
     printf("\033[1m[5]\033[0m - Windows Tools\n");
 
-    printf("\n\033[1mMake your selection: \033[0m");
+    printf("\n\033[1m\033[32mMake your selection: \033[0m");
     //fgets(selection,sizeof(selection),stdin);
     scanf("%d", &selection);
     printf("\n");
@@ -43,7 +44,14 @@ int main(){
             printf("\033[1m\033[34mChanging directories to Windows Tools\033[0m");
             system("cd /home/kali/Desktop/tools/Toolies && $SHELL");
             break;
-
+        
+        default:
+            printf("\033[1m\033[31m\n------------------------------\n\033[0m");
+            printf("\033[1m\033[31m\n%d is not a valid selection, try again.\n\033[0m", selection);
+            printf("\033[1m\033[31m\n------------------------------\n\033[0m");
+            break;
         }
+    } while (selection != 99);
 }
+
 
